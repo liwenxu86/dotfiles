@@ -99,3 +99,4 @@ fi
 export SUDO_USER=$USER
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#export PS1="\[$(tput bold)\]\[\033[38;5;46m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;231m\]:\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;75m\]\w\[$(tput sgr0)\]\[\033[38;5;231m\]\\$\[$(tput sgr0)\] \[$(tput sgr0)\]"

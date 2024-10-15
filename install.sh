@@ -10,15 +10,17 @@ if [[ $platform == 'Darwin' ]]; then
   if ! command -v brew &> /dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/olxu/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  # https://stackoverflow.com/questions/66859145/why-updating-homebrew-takes-forever
-  if [[ ! -f /usr/local/Homebrew/.git/TMP_FETCH_FAILURES ]]; then
-    touch /usr/local/Homebrew/.git/TMP_FETCH_FAILURES
-  fi
+#  # https://stackoverflow.com/questions/66859145/why-updating-homebrew-takes-forever
+#  if [[ ! -f /usr/local/Homebrew/.git/TMP_FETCH_FAILURES ]]; then
+#    touch /usr/local/Homebrew/.git/TMP_FETCH_FAILURES
+#  fi
 
   echo "Updating homebrew"
   for pkg in xquartz iterm2 keepingyouawake spectacle macfuse \
-    visualvm rstudio r mactex xbar karabiner-elements miniconda \
+    visualvm rstudio r xbar karabiner-elements miniconda \
     adoptopenjdk maccy visual-studio-code scroll-reverser; do
 #    if ! brew list --cask $pkg &> /dev/null; then
     if ! brew list --cask -1 | grep -q "^${pkg}\$"; then

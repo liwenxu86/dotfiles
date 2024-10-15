@@ -401,7 +401,7 @@ hi CursorLine gui=underline cterm=underline
 "hi statusline ctermfg=15 ctermbg=None guifg=white
 set statusline+=%{get(b:,'gitsigns_status','')}
 "hi Normal ctermbg=None guibg=black guifg=white
-hi! Normal ctermbg=NONE guibg=NONE
+"hi! Normal ctermbg=NONE guibg=NONE
 
 set tags=tags;/
 
@@ -445,8 +445,8 @@ xmap <Leader>ga <Plug>(LiveEasyAlign)
 nnoremap <silent> <leader>t :TroubleToggle<CR>
 
 " fzf
-nnoremap <silent> <Leader>f :Rg<CR>
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <silent> <Leader>f :Rg<CR>
 
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
 nnoremap <Leader>E :TagbarToggle<CR>
