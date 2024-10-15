@@ -1,4 +1,4 @@
-#zmodload zsh/zprof
+zmodload zsh/zprof
 
 [ -f "$LOCAL_ADMIN_SCRIPTS/master.zshrc" ] && source "$LOCAL_ADMIN_SCRIPTS/master.zshrc"
 
@@ -72,9 +72,11 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias mydu='du -ks * | sort -nr | cut -f2 | sed '"'"'s/^/"/;s/$/"/'"'"' | xargs du -sh'
 alias screen='screen -e\`n -s /bin/bash'
-alias tmux='export TERM=screen-256color; /usr/local/bin/tmux'
+#alias tmux='export TERM=screen-256color; /usr/local/bin/tmux'
+alias tmux='SHELL=/usr/local/bin/zsh tmux -L zsh'
 alias vim='vim -X -O'
 alias ports='lsof -nP -iTCP -sTCP:LISTEN'
+alias python3='python3.9'
 
 # git aliases
 alias gs="git status"
@@ -97,20 +99,6 @@ bindkey '^R' history-incremental-search-backward
 
 # https://unix.stackexchange.com/questions/290392/backspace-in-zsh-stuck
 bindkey -v '^?' backward-delete-char
-
-# zsh prompt formatting
-fpath+=$HOME/.zsh/pure
-
-# zsh compsys
-autoload -Uz compinit && compinit
-_comp_options+=(globdots)
-
-autoload -U promptinit; promptinit
-prompt pure
-
-print() {
-  [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
-}
 
 # zsh-bd
 . ~/.zsh/plugins/bd/bd.zsh
@@ -197,5 +185,29 @@ do
   alias $lazy_conda_alias="load_conda && $lazy_conda_alias"
 done
 
-#zprof
+# zsh prompt formatting
+#fpath+=$HOME/.zsh/pure
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+
+# zsh compsys
+autoload -Uz compinit
+if [[ -n $(print ~/.zcompdump(Nmh+24)) ]] {
+  # Regenerate completions because the dump file hasn't been modified within the last 24 hours
+  compinit
+} else {
+  # Reuse the existing completions file
+  compinit -C
+}
+
+#autoload -Uz compinit && compinit
+#_comp_options+=(globdots)
+
+autoload -U promptinit; promptinit
+prompt pure
+
+print() {
+  [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
+}
+
+zprof
 
