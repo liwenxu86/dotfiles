@@ -189,6 +189,9 @@ done
 #fpath+=$HOME/.zsh/pure
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 
+#autoload -Uz compinit && compinit
+#_comp_options+=(globdots)
+
 # zsh compsys
 autoload -Uz compinit
 if [[ -n $(print ~/.zcompdump(Nmh+24)) ]] {
@@ -198,9 +201,6 @@ if [[ -n $(print ~/.zcompdump(Nmh+24)) ]] {
   # Reuse the existing completions file
   compinit -C
 }
-
-#autoload -Uz compinit && compinit
-#_comp_options+=(globdots)
 
 autoload -U promptinit; promptinit
 prompt pure

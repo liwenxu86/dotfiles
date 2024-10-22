@@ -61,6 +61,8 @@ if ! shopt -q login_shell ; then # We're not a login shell
 fi
 # vim:ts=4:sw=4
 
+. ~/.z.sh
+
 # Commented out since a lot of older boxes don't use this, and it's features we really don't need anyway
 # 11/07/07
 #. /etc/bash_completion
