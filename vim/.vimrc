@@ -9,6 +9,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'preservim/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'dstein64/vim-startuptime'
+Plug 'vim-scripts/Zenburn'
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
@@ -395,6 +396,7 @@ nnoremap <C-p> :bprevious<CR>
 set t_Co=256
 let g:seoul256_background = 233
 colo seoul256
+"colo zenburn
 
 hi clear CursorLine
 hi CursorLine gui=underline cterm=underline

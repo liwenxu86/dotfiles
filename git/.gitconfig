@@ -9,6 +9,7 @@
 #  gpgsign = true
 [core]
   excludesfile = ~/.gitignore
+	autocrlf = input 
 [http]
   postBuffer = 524288000
 	sslVerify = false
@@ -17,3 +18,5 @@
 
 [advice]
 	pushNonFastForward = false
+[safe]
+  directory = /etc/nixos

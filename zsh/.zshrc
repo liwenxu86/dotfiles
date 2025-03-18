@@ -76,7 +76,7 @@ alias screen='screen -e\`n -s /bin/bash'
 alias tmux='SHELL=/usr/local/bin/zsh tmux -L zsh'
 alias vim='vim -X -O'
 alias ports='lsof -nP -iTCP -sTCP:LISTEN'
-alias python3='python3.9'
+alias pip='pip3'
 
 # git aliases
 alias gs="git status"
@@ -208,6 +208,16 @@ prompt pure
 print() {
   [ 0 -eq $# -a "prompt_pure_precmd" = "${funcstack[-1]}" ] || builtin print "$@";
 }
+
+alias python=/opt/homebrew/bin/python3.9
+alias python3=/opt/homebrew/bin/python3.9
+
+export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
 
 #zprof
 
