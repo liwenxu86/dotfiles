@@ -365,7 +365,7 @@ set autoindent
 set smartindent
 set clipboard=unnamed
 set autoread
-set autochdir
+"set autochdir
 set timeoutlen=1000 ttimeoutlen=10
 set laststatus=2
 set wildmenu
@@ -447,7 +447,14 @@ xmap <Leader>ga <Plug>(LiveEasyAlign)
 nnoremap <silent> <leader>t :TroubleToggle<CR>
 
 " fzf
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+let g:rg_command = '
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+  \ -g "!*.{min.js,swp,o,zip}" 
+  \ -g "!{.git,node_modules,vendor}/*" '
+
+"command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
 nnoremap <silent> <Leader>f :Rg<CR>
 
 nnoremap <silent> <Leader>e :NvimTreeToggle<CR>
@@ -471,6 +478,8 @@ autocmd Filetype rmd inoremap ;m <Space>%>%<Space>
 autocmd Filetype rmd nnoremap <Space>H :silent !brave &>/dev/null %<.html &<CR>:redraw!<CR>
 autocmd FileType python map <buffer> <leader>x :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <leader>x <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+let g:python_recommended_style = 0
+au Filetype python setlocal ts=2 sts=0 sw=2
 
 " save with sudo using w!!
 cmap w!! w !sudo tee > /dev/null %
