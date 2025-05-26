@@ -10,6 +10,7 @@ Plug 'preservim/tagbar'
 Plug 'tpope/vim-fugitive'
 Plug 'dstein64/vim-startuptime'
 Plug 'vim-scripts/Zenburn'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer' }
 
 if has('nvim')
   Plug 'neovim/nvim-lspconfig'
@@ -483,3 +484,7 @@ au Filetype python setlocal ts=2 sts=0 sw=2
 
 " save with sudo using w!!
 cmap w!! w !sudo tee > /dev/null %
+
+let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/ycm_global_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+set cscopetag
